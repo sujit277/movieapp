@@ -37,7 +37,7 @@ const GenreSelect = (props) => {
             style={{
               backgroundImage: `url(${data?.poster_path})`,
               height: "350px",
-              width: "250px",
+              width: "300px",
               zIndex: "-1",
             }}
           >
