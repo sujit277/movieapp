@@ -1,0 +1,32 @@
+.movieGenre {
+  margin-bottom: 20px;
+  font-size: 20px;
+  color: white;
+}
+
+.durationTime {
+  margin-bottom: 50px;
+  color: red;
+  font-size: 30px;
+}
+
+.movieTitle {
+  margin-bottom: 20px;
+  color: white;
+}
+
+.movieReleaseDate {
+  margin-right: 50px;
+  color: red;
+  font-size: 30px;
+}
+
+.movieOverview {
+  margin-top: "20px";
+  color: white;
+}
+
+.movieDetails {
+  background-color: #232323;
+  padding: 30px;
+}

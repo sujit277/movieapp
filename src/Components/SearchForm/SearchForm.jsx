@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./SearchForm.css";
+import MovieForm from "../MovieForm/MovieForm";
 
 const SearchForm = (props) => {
   const [searchValue, setSearchValue] = useState(props.searchValue);
@@ -7,7 +8,7 @@ const SearchForm = (props) => {
     <>
       <div className="search">
         <h3 className="apptitle">netflix roulette</h3>
-        <button className="addmoviebutton">+ ADD MOVIE</button>
+        <MovieForm />
         <h2 className="findmovie">FIND YOUR MOVIE</h2>
         <form
           onSubmit={(event) => {

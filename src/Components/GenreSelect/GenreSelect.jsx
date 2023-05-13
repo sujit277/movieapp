@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./GenreSelect.css";
 import Img2 from "../../images/DropdownOptions.png";
+import SortControl from "../SortControl/SortControl";
 
 const GenreSelect = (props) => {
+  const [filter, setFilter] = useState("Release Date");
+  const [updatedMovieData, setUpdatedMovieData] = useState();
   const data = ["ALL", "DOCUMENTARY", "COMDEY", "HORROR", "CRIME"];
+
+  useEffect(() => {
+    filterMovies(filter);
+  });
 
   function navOptions(data) {
     return (
@@ -13,7 +20,32 @@ const GenreSelect = (props) => {
     );
   }
 
-  function movieType(data) {
+  function compare(a, b) {
+    if (a.title < b.title) {
+      return -1;
+    }
+    if (a.title > b.title) {
+      return 1;
+    }
+    return 0;
+  }
+
+  function filterMovies(filterType) {
+    if (filterType == "Title") {
+      setUpdatedMovieData(props.movieData.sort(compare));
+    }
+    if (filterType == "Release Date") {
+      setUpdatedMovieData(
+        props.movieData.sort(
+          (a, b) =>
+            Number(a.release_date.split("-")[0]) -
+            Number(b.release_date.split("-")[0])
+        )
+      );
+    }
+  }
+
+  function getMovieGernes(data) {
     if (data.length === 1) {
       const str = data[0];
       return <h6 className="movietype">{`${str}`}</h6>;
@@ -23,12 +55,17 @@ const GenreSelect = (props) => {
     }
   }
 
-  function movieItem(data) {
+  function onFilterChange(filterValue) {
+    setFilter(filterValue);
+    filterMovies(filterValue);
+  }
+
+  function  movieTile(data) {
     return (
       <>
         <div
           className="col-3 movieitem"
-          data-testid="movieItem"
+          data-testid="  movieTile"
           onClick={() => {
             props.onSelect(data.title);
           }}
@@ -45,7 +82,6 @@ const GenreSelect = (props) => {
               <div class="dropdown" data-testid="selectedmovie">
                 <h6
                   class="btn btn-secondary dropdown-toggle dropdown-btn"
-                  href="#"
                   role="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
@@ -68,20 +104,12 @@ const GenreSelect = (props) => {
                     ></button>
                   </li>
                   <li>
-                    <h6
-                      class="dropdown-item"
-                      href="#"
-                      style={{ color: "white" }}
-                    >
+                    <h6 class="dropdown-item" style={{ color: "white" }}>
                       Edit
                     </h6>
                   </li>
                   <li>
-                    <h6
-                      class="dropdown-item"
-                      href="#"
-                      style={{ color: "white" }}
-                    >
+                    <h6 class="dropdown-item" style={{ color: "white" }}>
                       Delete
                     </h6>
                   </li>
@@ -95,7 +123,7 @@ const GenreSelect = (props) => {
               {(data?.release_date).split("-")[0]}
             </span>
           </div>
-          {movieType(data?.genres)}
+          {getMovieGernes(data?.genres)}
         </div>
       </>
     );
@@ -110,42 +138,17 @@ const GenreSelect = (props) => {
               return navOptions(item);
             })}
           </nav>
-          <h5 className="mx-6 sortby">Sort By</h5>
-          <div
-            class="dropdown"
-            style={{ marginLeft: "20px", marginTop: "10px" }}
-          >
-            <button
-              class="btn btn-sm btn-secondary dropdown-toggle"
-              type="button"
-              style={{ backgroundColor: "#232323" }}
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              RELEASE DATE
-            </button>
-            <ul class="dropdown-menu">
-              <li>
-                <h6 class="dropdown-item" href="#">
-                  Action
-                </h6>
-              </li>
-              <li>
-                <h6 class="dropdown-item" href="#">
-                  Another action
-                </h6>
-              </li>
-            </ul>
-          </div>
+          <SortControl onFilterChange={onFilterChange} filter={filter} />
         </div>
+        <hr style={{ color: "white" }}></hr>
         <h4 style={{ margin: "20px 30px 0 50px", color: "white" }}>
           {props.movieData.length} Movies Found
         </h4>
         <div style={{ textAlign: "center", marginTop: "30px" }}>
           <div className="container">
             <div className="row" style={{ margin: "0px 40px" }}>
-              {props.movieData.map((item) => {
-                return movieItem(item);
+              {updatedMovieData?.map((item) => {
+                return   movieTile(item);
               })}
             </div>
           </div>

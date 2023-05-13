@@ -20,14 +20,14 @@ describe("SearchForm Component", () => {
     expect(onSearchFn).toHaveBeenCalledWith("Beauty and the Beast");
   });
 
-  /* test("onSearch prop is called with proper value on Enter Press on Input box", async () => {
+  /*  test("onSearch prop is called with proper value on Enter Press on Input box", async () => {
     userEvent.setup();
     const onSearchFn = jest.fn();
     render(
       <SearchForm searchValue={"Beauty and the Beast"} onSearch={onSearchFn} />
     );
     const searchBox = screen.getByRole("textbox");
-    await userEvent.type(searchBox, "Beauty and the Beast");
+    await userEvent.keyboard(searchBox);
     expect(onSearchFn).toHaveBeenCalledWith("Beauty and the Beast");
   }); */
 });

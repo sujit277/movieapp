@@ -3,11 +3,16 @@ import axios from "axios";
 import GenreSelect from "./Components/GenreSelect/GenreSelect";
 import Counter from "./Components/Counter/Counter";
 import SearchForm from "./Components/SearchForm/SearchForm";
+import MovieDetails from "./Components/MovieDetails/MovieDetails";
+
+
 
 const App = () => {
   const [movieData, setMovieData] = useState([]);
   const [count, setCount] = useState(0);
   const [selectedGenre, setSelectedGenre] = useState();
+  const [searchFormVisibility, setSearchFormVisibility] = useState(true);
+  const [moviedetails, setMovieDetails] = useState({});
 
   useEffect(() => {
     getallMOvies();
@@ -19,7 +24,8 @@ const App = () => {
 
   function onSelect(movieName) {
     setSelectedGenre(movieName);
-    console.log(movieName);
+    setMovieDetails(movieData.filter((movie) => movie.title === movieName));
+    setSearchFormVisibility(false);
   }
 
   async function getallMOvies() {
@@ -29,11 +35,16 @@ const App = () => {
 
   return (
     <>
-     {/*  <Counter count={count}></Counter> */}
-      <SearchForm
-        searchValue="Beauty and the Beast"
-        onSearch={onSearch}
-      ></SearchForm>
+      {/*  <Counter count={count}></Counter> */}
+      {searchFormVisibility === true ? (
+        <SearchForm
+          searchValue="Beauty and the Beast"
+          onSearch={onSearch}
+        ></SearchForm>
+      ) : (
+        <MovieDetails moviedetails={moviedetails} />
+      )}
+
       <GenreSelect
         movieData={movieData}
         onSelect={onSelect}

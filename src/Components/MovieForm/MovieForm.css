@@ -1,0 +1,25 @@
+.closebutton {
+  display: flex;
+  float: right;
+  margin-right: 125px;
+  margin-top: 20px;
+  height: 40px;
+  width: 150px;
+  padding: 5px 25px;
+  color: red;
+  background-color: #606060;
+}
+
+.formoverview {
+  height: 100px;
+  width: 100%;
+  margin-left: 10px;
+}
+
+.formlabel {
+  color: red;
+}
+
+.inputfield {
+  background-color: #606060;
+}
