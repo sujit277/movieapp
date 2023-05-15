@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./GenreSelect.css";
 import Img2 from "../../images/DropdownOptions.png";
 import SortControl from "../SortControl/SortControl";
+import MovieForm from "../MovieForm/MovieForm";
 
 const GenreSelect = (props) => {
   const [filter, setFilter] = useState("Release Date");
@@ -60,7 +61,7 @@ const GenreSelect = (props) => {
     filterMovies(filterValue);
   }
 
-  function  movieTile(data) {
+  function movieTile(data) {
     return (
       <>
         <div
@@ -105,12 +106,12 @@ const GenreSelect = (props) => {
                   </li>
                   <li>
                     <h6 class="dropdown-item" style={{ color: "white" }}>
-                      Edit
+                      <MovieForm name={'editForm'} />
                     </h6>
                   </li>
                   <li>
                     <h6 class="dropdown-item" style={{ color: "white" }}>
-                      Delete
+                      <MovieForm name={'deleteForm'} />
                     </h6>
                   </li>
                 </ul>
@@ -148,7 +149,7 @@ const GenreSelect = (props) => {
           <div className="container">
             <div className="row" style={{ margin: "0px 40px" }}>
               {updatedMovieData?.map((item) => {
-                return   movieTile(item);
+                return movieTile(item);
               })}
             </div>
           </div>

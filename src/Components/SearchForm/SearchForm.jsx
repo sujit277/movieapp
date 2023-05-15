@@ -8,7 +8,7 @@ const SearchForm = (props) => {
     <>
       <div className="search">
         <h3 className="apptitle">netflix roulette</h3>
-        <MovieForm />
+        <MovieForm name={"addForm"} />
         <h2 className="findmovie">FIND YOUR MOVIE</h2>
         <form
           onSubmit={(event) => {

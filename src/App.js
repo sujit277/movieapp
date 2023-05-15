@@ -5,8 +5,6 @@ import Counter from "./Components/Counter/Counter";
 import SearchForm from "./Components/SearchForm/SearchForm";
 import MovieDetails from "./Components/MovieDetails/MovieDetails";
 
-
-
 const App = () => {
   const [movieData, setMovieData] = useState([]);
   const [count, setCount] = useState(0);
