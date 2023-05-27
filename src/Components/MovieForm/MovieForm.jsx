@@ -4,6 +4,26 @@ import "./MovieForm.css";
 
 const MovieForm = (props) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [formData, setFormData] = useState({
+    title: "",
+    releasedate: "",
+    movieurl: "",
+    rating: "",
+    genre: "",
+    overview: "",
+    runntime: "",
+  });
+
+  function handleInput(event) {
+    const name = event.target.name;
+    const value = event.target.value;
+    setFormData({ ...formData, [name]: value });
+  }
+
+  function addMovie(event) {
+    event.preventDefault();
+    console.log(formData);
+  }
 
   return (
     <>
@@ -42,41 +62,57 @@ const MovieForm = (props) => {
           >
             <div className="row">
               <div className="col">
-                <form>
+                <form
+                  onSubmit={(event) => {
+                    addMovie(event);
+                  }}
+                >
                   <div className="row mb-3">
                     <div className="col-8">
                       <label for="email" className="form-label formlabel">
                         TITLE
                       </label>
                       <input
-                        type="email"
+                        type="text"
                         className="form-control inputfield"
-                        id="email"
+                        id="title"
+                        name="title"
                         placeholder="Monna"
+                        onChange={(event) => {
+                          handleInput(event);
+                        }}
                       />
                     </div>
                     <div className="col-4">
-                      <label for="date" className="form-label formlabel">
+                      <label for="releasedate" className="form-label formlabel">
                         RELEASE DATE
                       </label>
                       <input
                         type="date"
                         className="form-control inputfield"
-                        id="date"
+                        id="releasedate"
+                        name="releasedate"
                         placeholder="Select Date"
+                        onChange={(event) => {
+                          handleInput(event);
+                        }}
                       />
                     </div>
                   </div>
                   <div className="row mb-3">
                     <div className="col-8">
-                      <label for="url" className="form-label formlabel">
+                      <label for="movieurl" className="form-label formlabel">
                         MOVIE URL
                       </label>
                       <input
                         type="text"
                         className="form-control inputfield"
-                        id="url"
+                        id="movieurl"
+                        name="movieurl"
                         placeholder="https://"
+                        onChange={(event) => {
+                          handleInput(event);
+                        }}
                       />
                     </div>
                     <div className="col-4">
@@ -87,7 +123,11 @@ const MovieForm = (props) => {
                         type="text"
                         className="form-control inputfield"
                         id="rating"
+                        name="rating"
                         placeholder="7.8"
+                        onChange={(event) => {
+                          handleInput(event);
+                        }}
                       />
                     </div>
                   </div>
@@ -100,6 +140,10 @@ const MovieForm = (props) => {
                         type="text"
                         className="form-control inputfield"
                         id="genre"
+                        name="genre"
+                        onChange={(event) => {
+                          handleInput(event);
+                        }}
                       />
                     </div>
                     <div className="col-4">
@@ -110,6 +154,10 @@ const MovieForm = (props) => {
                         type="text"
                         className="form-control inputfield"
                         id="runtime"
+                        name="runtime"
+                        onChange={(event) => {
+                          handleInput(event);
+                        }}
                       />
                     </div>
                   </div>
@@ -120,7 +168,11 @@ const MovieForm = (props) => {
                     <textarea
                       className="formoverview inputfield"
                       id="overview"
+                      name="overview"
                       placeholder="Movie description"
+                      onChange={(event) => {
+                        handleInput(event);
+                      }}
                     />
                   </div>
                   <button type="submit" className="btn submitbutton">
